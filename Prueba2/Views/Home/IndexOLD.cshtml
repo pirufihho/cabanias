@@ -1,0 +1,157 @@
+﻿<!doctype html>
+<!-- Website template by freewebsitetemplates.com -->
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space Science Website Template</title>
+    @*<link rel="stylesheet" href="css/style.css" type="text/css">
+        <link rel="stylesheet" type="text/css" href="css/mobile.css">*@
+    @*<script src="js/mobile.js" type="text/javascript"></script>*@
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link href="~/css/style.css" rel="stylesheet" />
+
+</head>
+<body>
+    <div id="page" ng-app="myApp" ng-controller="myCtrl">
+        <div id="header">
+
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <div class="menuNavBar">
+                        <ul class="nav navbar-nav">
+                            <li ng-class="(DivHome==true) ? 'selected' :'' ">
+                                <a class="menulink" href="" ng-click="MostrarDivHome()">Home</a>
+                            </li>
+                            <li ng-class="(DivCabanias==true) ? 'selected' :'' ">
+                                <a class="menulink" href="" ng-click="MostrarDivGaleria()">Galeria</a>
+                            </li>
+                            <li ng-class="(DivAdmin==true) ? 'selected' :'' ">
+                                <a class="menulink" href="" ng-click="MostrarDivAdmin()">Admin</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+
+        </div>
+        <div id="body" class="home">
+
+
+            @*ACA VAN LAS VISTAS Y SWITCHEAMOS CON LOS NG-IF*@
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <div class="collapse navbar-collapse">
+                    <div class="container-fluid js-tm-page-content" ng-show="DivHome">
+                        <h2>HOME!!!!!</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4"></div>
+
+
+            <!--Area Cabanias-->
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <div class="collapse navbar-collapse">
+                    <div class="container-fluid js-tm-page-content" ng-show="DivCabanias">
+                        <div ng-repeat="x in cabaniasList">
+                            <table>
+                                <tr>
+                                    <td><label>{{x.Titulo}}</label></td>
+                                    <td ng-if="Logueado">
+                                        <a href="" ng-click="Delete(x.Id);">
+                                            <img src="../img/ico_cerrar.png" />
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><img ng-src="{{x.Url}}" alt="Image" class="img-fluid tm-img"></td>
+                                    <td><textarea rows="2" cols="20" ng-model="x.Descripcion"></textarea></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4"></div>
+            <!--Area Cabanias-->
+
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <div class="container-fluid js-tm-page-content" ng-show="DivAdmin">
+                    <!--AREA LOGIN-->
+                    <div class="row" ng-show="!Logueado">
+                        <table>
+                            <tr>
+                                <td>USER: </td>
+                                <td><input type="text" id="usrInput" ng-model="User" /></td>
+                            </tr>
+                            <tr>
+                                <td>PASSWORD: </td>
+                                <td><input type="password" id="passInput" ng-model="Pass" /></td>
+                            </tr>
+                            <tr>
+                                <td>
+
+                                </td>
+                                <td>
+                                    @*<a href="" ng-click="Login()" class="btn btn-success">Login</a>*@
+                                    <a href="#" class="btn btn-primary btn-lg" ng-click="Login()">Login</a>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <!--AREA LOGIN-->
+                    <!--AREA ADMINISTRACION-->
+                    <div class="row" ng-if="Logueado">
+                        <table>
+                            <tr>
+                                <td>Titulo: </td>
+                                <td><input type="text" ng-model="Cabanas.Titulo" /></td>
+                            </tr>
+                            <tr>
+                                <td>Url: </td>
+                                <td><input type="text" ng-model="Cabanas.Url" /></td>
+                            </tr>
+                            <tr>
+                                <td>Descripcion: </td>
+                                <td><textarea rows="2" cols="20" ng-model="Cabanas.Descripcion"></textarea></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @*<input type="button" value="Cargar" ng-click="Insert()" />*@
+                                    <a href="#" class="btn btn-success" ng-click="Insert()">Cargar</a>
+                                </td>
+                                <td>
+                                    @*<input type="button" value="LOGOUT" ng-click="Logout()" />*@
+                                    <a href="#" class="btn btn-default" ng-click="Logout()">Logout</a>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <!--AREA ADMINISTRACION-->
+                </div>
+            </div>
+            <div class="col-md-4"></div>
+
+
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+    <script src="../Scripts/myApp.js"></script>
+    <script src="../Scripts/js/mobile.js"></script>
+
+</body>
+</html>

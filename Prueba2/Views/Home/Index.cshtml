@@ -1,0 +1,205 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Cabanias Valle</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="Description" lang="en" content="ADD SITE DESCRIPTION">
+    <meta name="author" content="ADD AUTHOR INFORMATION">
+    <meta name="robots" content="index, follow">
+    <!-- icons -->
+    <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+    <link rel="shortcut icon" href="favicon.ico">
+    <!-- Override CSS file - add your own CSS rules -->
+    <link href="~/css/styles.css" rel="stylesheet" />
+
+</head>
+<body ng-app="myApp" ng-controller="myCtrl">
+    <div class="header">
+        <div class="container">
+            <h1>
+                @*<img src="~/img/Logo.png" class="logo"/>*@
+                Cabañas Valle
+            </h1>
+        </div>
+    </div>
+    <div class="nav-bar">
+        <div class="container">
+            <ul class="nav">
+                <li><a href="#" ng-click="MostrarDivHome()">Home</a></li>
+                <li><a href="#" ng-click="MostrarDivGaleria()">Galeria</a></li>
+                <li><a href="#" ng-click="MostrarDivContacto()">Contacto</a></li>
+                <li><a href="#" ng-click="MostrarDivAdmin()">Admin</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="content">
+        <div class="container">
+            <div class="main">
+                <div id="home" ng-show="DivHome" class="divHome">
+                    <h1>Introduccion</h1>
+                    <!-- Paragraphs -->
+                    <h3>
+                        <p>Bienvenidos al sitio de Cabañas Valle, somos una empresa que se dedica al alquiler de soluciones habitacionales, cabañas, casas, departamentos,etc.</p>
+
+                        <p>Tenemos una seccion donde puedes ver nuestra galeria con las diferentes viviendas y un video de presentacion, tambien puedes contactarte con nosotros en el are de Contacto.</p>
+                    </h3>
+                </div>
+
+                <div id="galeria" ng-show="DivCabanias">
+                    <h1>
+                        Galeria
+                    </h1>
+                    <!-- Paragraphs -->
+                    <h3>
+                        <p>
+                            Para poder modificar o eliminar primero debe loguearse en la seccion de Administracion:
+                        </p>
+                    </h3>
+                    <div ng-repeat="x in items">
+                        <table>
+                            <tr>
+                                <td>
+                                    <label ng-if="!(x.Id==IdSelec)">{{x.Titulo}}</label>
+                                    <input type="text" ng-model="x.Titulo" ng-if="x.Id==IdSelec" />
+                                </td>
+                                <td ng-if="Logueado">
+                                    <a href="" ng-click="Delete(x.Id);">
+                                        <img src="../img/120px-Icon-trash.png" style="height:30px; width:30px;" />
+                                    </a>
+                                    <a href="" ng-if="!(x.Id==IdSelec)" ng-hide="" ng-click="SwitchEditMode(x.Id);">
+                                        <img src="../img/Pencil.png" style="height:30px; width:30px;" />
+                                    </a>
+                                    <a href="" ng-if="(x.Id==IdSelec)" ng-click="Save(x.Id,x.Titulo,x.Descripcion,x.Url);">
+                                        <img src="../img/Save_ico.png" style="height:30px; width:30px;" />
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <img ng-src="{{x.Url}}" alt="Image" class="imgCab">
+                                </td>
+                                <td>
+                                    <label ng-if="!(x.Id==IdSelec)" style="width: 170px; display: inline-block;">{{x.Descripcion}}</label>
+                                    <textarea ng-if="x.Id==IdSelec" rows="5" cols="20" ng-model="x.Descripcion" style="width:170px"></textarea>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="text" ng-model="x.Url" ng-if="(x.Id==IdSelec)" style="width: 170px; display: inline-block;">
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div>
+                        <ul ng-if="pager.pages.length" class="pagination">
+                            <li ng-class="{disabled:pager.currentPage === 1}">
+                                <a ng-click="setPage(pager.currentPage - 1)"><<</a>
+                            </li>
+                            <li ng-repeat="page in pager.pages" ng-class="{active:pager.currentPage === page}">
+                                <a ng-click="setPage(page)">{{page}}</a>
+                            </li>
+                            <li ng-class="{disabled:pager.currentPage === pager.totalPages}">
+                                <a ng-click="setPage(pager.currentPage + 1)">>></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div id="contacto" ng-if="DivContacto">
+                    <table>
+                        <tr>
+                            <td>
+                                E-Mail:
+                            </td>
+                            <td>
+                                <input ng-class="{'errorFront': inputEmailInalid || inputEmail}" ng-model="Contactos.Email" type="text" name="Email" value="" />
+                            </td>
+                            <td>
+                                <a ng-if="inputEmail" class="errorFront">{{ErroresFront.Obligatorio}}</a>
+                            </td>
+                            <td>
+                                <a ng-if="inputEmailInalid" class="errorFront">{{ErroresFront.EmailInvalid}}</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Consulta:
+                            </td>
+                            <td><textarea ng-class="{'errorFront': inputConsulta}" ng-model="Contactos.Consulta" rows="5" cols="20" style="width:170px"></textarea></td>
+                            <td><a ng-if="inputConsulta" class="errorFront">{{ErroresFront.Obligatorio}}</a></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="#" class="btn btn-primary btn-lg" ng-click="ValidarContacto()">Enviar</a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div id="admin" ng-show="DivAdmin">
+                    <!--AREA LOGIN-->
+                    <div class="row" ng-show="!Logueado">
+                        <table>
+                            <tr>
+                                <td>USER: </td>
+                                <td><input type="text" id="usrInput" ng-model="User" /></td>
+                            </tr>
+                            <tr>
+                                <td>PASSWORD: </td>
+                                <td><input type="password" id="passInput" ng-model="Pass" /></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>
+                                    <a href="#" class="btn btn-primary btn-lg" ng-click="Login()">Login</a>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <!--AREA LOGIN-->
+                    <!--AREA ADMINISTRACION-->
+                    <div class="row" ng-if="Logueado">
+                        <table>
+                            <tr>
+                                <td>Titulo: </td>
+                                <td><input ng-class="{'errorFront': inputTitulo}" type="text" ng-model="Cabanas.Titulo" /></td>
+                                <td><a ng-if="inputTitulo" class="errorFront">{{ErroresFront.Obligatorio}}</a></td>
+                            </tr>
+                            <tr>
+                                <td>Url: </td>
+                                <td><input ng-class="{'errorFront': inputUrl}" type="text" ng-model="Cabanas.Url" /></td>
+                                <td><a ng-if="inputUrl" class="errorFront">{{ErroresFront.Obligatorio}}</a></td>
+                            </tr>
+                            <tr>
+                                <td>Descripcion: </td>
+                                <td><textarea ng-class="{'errorFront': inputDescripcion}" rows="5" cols="20" ng-model="Cabanas.Descripcion" style="width:170px"></textarea></td>
+                                <td><a ng-if="inputDescripcion" class="errorFront">{{ErroresFront.Obligatorio}}</a></td>
+                            </tr>
+
+                        </table>
+                        <div>
+                            <a href="#" class="btn btn-success" ng-click="ValidarInsert()">Cargar</a>
+
+                            <a href="#" class="btn btn-default" ng-click="Logout()">Logout</a>
+                        </div>
+                    </div>
+                    <!--AREA ADMINISTRACION-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="container">
+            &copy; Copyright 2015
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/0.10.0/lodash.min.js"></script>
+    <script src="../Scripts/myApp.js"></script>
+</body>
+</html>

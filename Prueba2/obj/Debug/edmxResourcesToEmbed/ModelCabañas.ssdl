@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BDDPruebaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'BDDPrueba.dbo.Cabanias' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Cabanias">
+    <Key>
+      <PropertyRef Name="Titulo" />
+      <PropertyRef Name="Descripcion" />
+      <PropertyRef Name="Url" />
+    </Key>
+    <Property Name="Titulo" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="Url" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="BDDPruebaModelStoreContainer">
+    <EntitySet Name="Cabanias" EntityType="Self.Cabanias" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Cabanias].[Titulo] AS [Titulo], 
+    [Cabanias].[Descripcion] AS [Descripcion], 
+    [Cabanias].[Url] AS [Url]
+    FROM [dbo].[Cabanias] AS [Cabanias]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>
