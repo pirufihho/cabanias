@@ -13,6 +13,10 @@
     <link rel="shortcut icon" href="favicon.ico">
     <!-- Override CSS file - add your own CSS rules -->
     <link href="~/css/styles.css" rel="stylesheet" />
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 </head>
 <body ng-app="myApp" ng-controller="myCtrl">
@@ -26,7 +30,7 @@
     </div>
     <div class="nav-bar">
         <div class="container">
-            <ul class="nav">
+            <ul class="navBar">
                 <li><a href="#" ng-click="MostrarDivHome()">Home</a></li>
                 <li><a href="#" ng-click="MostrarDivGaleria()">Galeria</a></li>
                 <li><a href="#" ng-click="MostrarDivContacto()">Contacto</a></li>
@@ -57,41 +61,41 @@
                             Para poder modificar o eliminar primero debe loguearse en la seccion de Administracion:
                         </p>
                     </h3>
-                    <div ng-repeat="x in items">
-                        <table>
-                            <tr>
-                                <td>
-                                    <label ng-if="!(x.Id==IdSelec)">{{x.Titulo}}</label>
-                                    <input type="text" ng-model="x.Titulo" ng-if="x.Id==IdSelec" />
-                                </td>
-                                <td ng-if="Logueado">
-                                    <a href="" ng-click="Delete(x.Id);">
-                                        <img src="../img/120px-Icon-trash.png" style="height:30px; width:30px;" />
-                                    </a>
-                                    <a href="" ng-if="!(x.Id==IdSelec)" ng-hide="" ng-click="SwitchEditMode(x.Id);">
-                                        <img src="../img/Pencil.png" style="height:30px; width:30px;" />
-                                    </a>
-                                    <a href="" ng-if="(x.Id==IdSelec)" ng-click="Save(x.Id,x.Titulo,x.Descripcion,x.Url);">
-                                        <img src="../img/Save_ico.png" style="height:30px; width:30px;" />
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <img ng-src="{{x.Url}}" alt="Image" class="imgCab">
-                                </td>
-                                <td>
-                                    <label ng-if="!(x.Id==IdSelec)" style="width: 170px; display: inline-block;">{{x.Descripcion}}</label>
-                                    <textarea ng-if="x.Id==IdSelec" rows="5" cols="20" ng-model="x.Descripcion" style="width:170px"></textarea>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input type="text" ng-model="x.Url" ng-if="(x.Id==IdSelec)" style="width: 170px; display: inline-block;">
-                                </td>
-                            </tr>
-                        </table>
+
+                    <div class="container" ng-repeat="x in items">
+                        <div class="row">
+                            <div class="col-sm-6 col-xs-12">
+                                <label ng-if="!(x.Id==IdSelec)">{{x.Titulo}}</label>
+                                <input type="text" ng-model="x.Titulo" ng-if="x.Id==IdSelec" />
+                            </div>
+                            <div class="col-sm-6 col-xs-12" ng-if="Logueado">
+                                <a href="" ng-click="Delete(x.Id);">
+                                    <img src="../img/120px-Icon-trash.png" style="height:30px; width:30px;" />
+                                </a>
+                                <a href="" ng-if="!(x.Id==IdSelec)" ng-hide="" ng-click="SwitchEditMode(x.Id);">
+                                    <img src="../img/Pencil.png" style="height:30px; width:30px;" />
+                                </a>
+                                <a href="" ng-if="(x.Id==IdSelec)" ng-click="Save(x.Id,x.Titulo,x.Descripcion,x.Url);">
+                                    <img src="../img/Save_ico.png" style="height:30px; width:30px;" />
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <img ng-src="{{x.Url}}" alt="Image" class="imgCab">
+                            </div>
+                            <div class="col-sm-6">
+                                <label ng-if="!(x.Id==IdSelec)" style="width: 170px; display: inline-block;">{{x.Descripcion}}</label>
+                                <textarea ng-if="x.Id==IdSelec" rows="5" cols="20" ng-model="x.Descripcion" style="width:170px"></textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <input type="text" ng-model="x.Url" ng-if="(x.Id==IdSelec)" style="width: 170px; display: inline-block;">
+                            </div>
+                        </div>
                     </div>
+
                     <div>
                         <ul ng-if="pager.pages.length" class="pagination">
                             <li ng-class="{disabled:pager.currentPage === 1}">

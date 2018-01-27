@@ -27,7 +27,7 @@ namespace Prueba2.Controllers
             switch (_EntornoSet)
             {
                 case Entorno.Local:
-                    ConnString = "Data Source=WKS543L\\SQLEXPRESS;Initial Catalog=BDDPrueba;User ID=pirufio; Password=pixellated02;";
+                    ConnString = "Data Source=FLAVIO-PC\\SQLEXPRESS;Initial Catalog=BDDPrueba;Integrated Security=True;";
                     break;
                 case Entorno.Prod:
                     ConnString=WebConfigurationManager.ConnectionStrings["BDDPruebaEntities"].ToString();
@@ -74,11 +74,11 @@ namespace Prueba2.Controllers
                             while (reader.Read())
                             {
                                 Cabanias c = new Cabanias();
-                                c.Titulo = reader[0].ToString();
-                                c.Descripcion = reader[1].ToString();
-                                c.Url = reader[2].ToString();
-                                c.Id = Convert.ToInt32(reader[3]);
-
+                                c.Id = Convert.ToInt32(reader[0]);
+                                c.Titulo = reader[1].ToString();
+                                c.Descripcion = reader[2].ToString();
+                                c.Url = reader[3].ToString();
+                                
                                 listaCabanias.Add(c);
                             }
                         }
@@ -89,7 +89,6 @@ namespace Prueba2.Controllers
                 result.Data = new { Respuesta = listaCabanias };
 
                 return result;
-
             }
             catch (Exception ex)
             {

@@ -119,49 +119,46 @@ Layout styles
 /* -----------------------
 Nav
 ------------------------*/
-
-.nav
-{
-	margin: 0;
-	padding: 0;
-	list-style: none;
+.navBar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
 }
 
-.nav li
-{
-	display: inline;
-	margin: 0;
+.navBar li {
+    display: inline;
 }
 
-.nav a
-{
-	display: block;
-	padding: .7em 1.25em;
-	color: #fff;
-	text-decoration: none;
-	border-bottom: 1px solid gray;
+
+.navBar a {
+    display: inline-block;
+    padding: .7em 1.25em;
+    color: #fff;
+    text-decoration: none;
+    border-bottom: 1px solid gray;
 }
 
-.nav a:link { color: white; }
-.nav a:visited { color: white; }
+.navBar a:link {
+        color: white;
+    }
+.navBar a:visited {
+        color: white;
+    }
 
-.nav a:focus
-{
-	color: black;
-	background-color: white;
-}
+.navBar a:focus {
+        color: black;
+        background-color: white;
+    }
 
-.nav a:hover
-{
-	color: white;
-	background-color: green;
-}
+.navBar a:hover {
+        color: white;
+        background-color: green;
+    }
 
-.nav a:active
-{
-	color: white;
-	background-color: red;
-}
+.navBar a:active {
+        color: white;
+        background-color: red;
+    }
 
 /* -----------------------
 Single styles
@@ -175,6 +172,8 @@ Single styles
     max-height:30%;
     max-width:60%;
 }
+
+
 
 .btn
 {
