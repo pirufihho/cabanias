@@ -173,25 +173,8 @@ Single styles
     max-width:60%;
 }
 
-
-
-.btn
-{
-	color: #fff !important;
-	background-color: royalblue;
-	border-color: #222;
-	display: inline-block;
-	padding: .5em 1em;
-	margin-bottom: 0;
-	font-weight: 400;
-	line-height: 1.2;
-	text-align: center;
-	white-space: nowrap;
-	vertical-align: middle;
-	cursor: pointer;
-	border: 1px solid transparent;
-	border-radius: .2em;
-	text-decoration: none;
+.inputEdit {
+    color:black;
 }
 
 .errorFront {

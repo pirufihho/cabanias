@@ -137,12 +137,17 @@
         }
 
 
-        if (consultaLenght === "")
-        {
+        if (consultaLenght === "") {
             $scope.inputConsulta = true;
         }
 
-       
+
+    }
+
+    $scope.CancelarContacto = function () {
+        $scope.inputEmailInalid = false;
+        $scope.inputEmail = false;
+        $scope.inputConsulta = false;
     }
 
     $scope.Load = function () {
@@ -172,27 +177,27 @@
         };
 
         $http.post('/Home/Insertar', _params)
-               .then(function (result) {
-                   // success
-                   if (result.data.Respuesta == "OK") {
-                       console.log('... Insert con exito.');
+            .then(function (result) {
+                // success
+                if (result.data.Respuesta == "OK") {
+                    console.log('... Insert con exito.');
 
-                       $scope.Cabanas.Titulo = "";
-                       $scope.Cabanas.Url = "";
-                       $scope.Cabanas.Descripcion = "";
+                    $scope.Cabanas.Titulo = "";
+                    $scope.Cabanas.Url = "";
+                    $scope.Cabanas.Descripcion = "";
 
-                       $scope.Load();
-                       $scope.MostrarDivGaleria();
-                   }
-                   else {
-                       console.log('... Error en el insert.')
-                   }
-               },
-               function (result) {
-                   //Error
-                   console.log('... Error en el insert');
+                    $scope.Load();
+                    $scope.MostrarDivGaleria();
+                }
+                else {
+                    console.log('... Error en el insert.')
+                }
+            },
+            function (result) {
+                //Error
+                console.log('... Error en el insert');
 
-               });
+            });
     }
 
     $scope.Delete = function (Id) {
@@ -205,25 +210,25 @@
         if (r == true) {
 
             $http.post('/Home/Eliminar', _params)
-               .then(function (result) {
-                   // success
-                   if (result.data.Respuesta == "OK") {
-                       console.log('... Delete con exito.');
+                .then(function (result) {
+                    // success
+                    if (result.data.Respuesta == "OK") {
+                        console.log('... Delete con exito.');
 
-                       $scope.Load();
-                       $scope.Cabanas.Titulo = "";
-                       $scope.Cabanas.Url = "";
-                       $scope.Cabanas.Descripcion = "";
-                   }
-                   else {
-                       console.log('... Error en el Delete.')
-                   }
-               },
-               function (result) {
-                   //Error
-                   console.log('... Error en el insert');
+                        $scope.Load();
+                        $scope.Cabanas.Titulo = "";
+                        $scope.Cabanas.Url = "";
+                        $scope.Cabanas.Descripcion = "";
+                    }
+                    else {
+                        console.log('... Error en el Delete.')
+                    }
+                },
+                function (result) {
+                    //Error
+                    console.log('... Error en el insert');
 
-               });
+                });
 
         } else {
             console.log("Presiono cancelar");
@@ -240,23 +245,23 @@
         };
 
         $http.post('/Home/Editar', _params)
-               .then(function (result) {
-                   // success
-                   if (result.data.Respuesta == "OK") {
-                       console.log('... Insert con exito.');
+            .then(function (result) {
+                // success
+                if (result.data.Respuesta == "OK") {
+                    console.log('... Insert con exito.');
 
-                       $scope.Load();
-                       $scope.SwitchEditMode();
-                   }
-                   else {
-                       console.log('... Error en el insert.')
-                   }
-               },
-               function (result) {
-                   //Error
-                   console.log('... Error en el insert');
+                    $scope.Load();
+                    $scope.SwitchEditMode();
+                }
+                else {
+                    console.log('... Error en el insert.')
+                }
+            },
+            function (result) {
+                //Error
+                console.log('... Error en el insert');
 
-               });
+            });
     }
 
     //FUNCION DEL PAGER

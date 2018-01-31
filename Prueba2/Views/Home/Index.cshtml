@@ -66,7 +66,7 @@
                         <div class="row">
                             <div class="col-sm-6 col-xs-12">
                                 <label ng-if="!(x.Id==IdSelec)">{{x.Titulo}}</label>
-                                <input type="text" ng-model="x.Titulo" ng-if="x.Id==IdSelec" />
+                                <input class="inputEdit" type="text" ng-model="x.Titulo" ng-if="x.Id==IdSelec" />
                             </div>
                             <div class="col-sm-6 col-xs-12" ng-if="Logueado">
                                 <a href="" ng-click="Delete(x.Id);">
@@ -86,12 +86,12 @@
                             </div>
                             <div class="col-sm-6">
                                 <label ng-if="!(x.Id==IdSelec)" style="width: 170px; display: inline-block;">{{x.Descripcion}}</label>
-                                <textarea ng-if="x.Id==IdSelec" rows="5" cols="20" ng-model="x.Descripcion" style="width:170px"></textarea>
+                                <textarea class="inputEdit" ng-if="x.Id==IdSelec" rows="5" cols="20" ng-model="x.Descripcion" style="width:170px"></textarea>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-12">
-                                <input type="text" ng-model="x.Url" ng-if="(x.Id==IdSelec)" style="width: 170px; display: inline-block;">
+                                <input class="inputEdit" type="text" ng-model="x.Url" ng-if="(x.Id==IdSelec)" style="width: 170px; display: inline-block;">
                             </div>
                         </div>
                     </div>
@@ -112,81 +112,107 @@
                 </div>
 
                 <div id="contacto" ng-if="DivContacto">
-                    <table>
-                        <tr>
-                            <td>
-                                E-Mail:
-                            </td>
-                            <td>
-                                <input ng-class="{'errorFront': inputEmailInalid || inputEmail}" ng-model="Contactos.Email" type="text" name="Email" value="" />
-                            </td>
-                            <td>
-                                <a ng-if="inputEmail" class="errorFront">{{ErroresFront.Obligatorio}}</a>
-                            </td>
-                            <td>
-                                <a ng-if="inputEmailInalid" class="errorFront">{{ErroresFront.EmailInvalid}}</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Consulta:
-                            </td>
-                            <td><textarea ng-class="{'errorFront': inputConsulta}" ng-model="Contactos.Consulta" rows="5" cols="20" style="width:170px"></textarea></td>
-                            <td><a ng-if="inputConsulta" class="errorFront">{{ErroresFront.Obligatorio}}</a></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a href="#" class="btn btn-primary btn-lg" ng-click="ValidarContacto()">Enviar</a>
-                            </td>
-                        </tr>
-                    </table>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            E-Mail:
+                        </div>
+                        <div class="col-sm-3">
+                            <input ng-class="{'errorFront': inputEmailInalid || inputEmail}" class="inputEdit" ng-model="Contactos.Email" type="text" name="Email" value="" />
+                        </div>
+                        <div class="col-sm-3">
+                            <a ng-if="inputEmail" class="errorFront">{{ErroresFront.Obligatorio}}</a>
+                        </div>
+                        <div class="col-sm-3">
+                            <a ng-if="inputEmailInalid" class="errorFront">{{ErroresFront.EmailInvalid}}</a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            Consulta:
+                        </div>
+                        <div class="col-sm-3">
+                            <textarea ng-class="{'errorFront': inputConsulta}" class="inputEdit" ng-model="Contactos.Consulta" rows="5" cols="20" style="width:174px"></textarea>
+                        </div>
+                        <div class="col-sm-6">
+                            <a ng-if="inputConsulta" class="errorFront">{{ErroresFront.Obligatorio}}</a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <a href="#" class="btn btn-primary btn-lg" ng-click="ValidarContacto()">Enviar</a>
+                            <a href="#" class="btn btn-primary btn-lg" ng-click="CancelarContacto()">Cancelar</a>
+                        </div>
+                    </div> 
                 </div>
 
                 <div id="admin" ng-show="DivAdmin">
                     <!--AREA LOGIN-->
-                    <div class="row" ng-show="!Logueado">
-                        <table>
-                            <tr>
-                                <td>USER: </td>
-                                <td><input type="text" id="usrInput" ng-model="User" /></td>
-                            </tr>
-                            <tr>
-                                <td>PASSWORD: </td>
-                                <td><input type="password" id="passInput" ng-model="Pass" /></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td>
+                    <div class="row" ng-show="!Logueado">                 
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    USER:
+                                </div>
+                                <div class="col-sm-9">
+                                    <input type="text" id="usrInput" ng-model="User" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    PASSWORD:
+                                </div>
+                                <div class="col-sm-9">
+                                    <input type="password" id="passInput" ng-model="Pass" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
                                     <a href="#" class="btn btn-primary btn-lg" ng-click="Login()">Login</a>
-                                </td>
-                            </tr>
-                        </table>
+                                </div>
+                            </div>
                     </div>
                     <!--AREA LOGIN-->
                     <!--AREA ADMINISTRACION-->
                     <div class="row" ng-if="Logueado">
-                        <table>
-                            <tr>
-                                <td>Titulo: </td>
-                                <td><input ng-class="{'errorFront': inputTitulo}" type="text" ng-model="Cabanas.Titulo" /></td>
-                                <td><a ng-if="inputTitulo" class="errorFront">{{ErroresFront.Obligatorio}}</a></td>
-                            </tr>
-                            <tr>
-                                <td>Url: </td>
-                                <td><input ng-class="{'errorFront': inputUrl}" type="text" ng-model="Cabanas.Url" /></td>
-                                <td><a ng-if="inputUrl" class="errorFront">{{ErroresFront.Obligatorio}}</a></td>
-                            </tr>
-                            <tr>
-                                <td>Descripcion: </td>
-                                <td><textarea ng-class="{'errorFront': inputDescripcion}" rows="5" cols="20" ng-model="Cabanas.Descripcion" style="width:170px"></textarea></td>
-                                <td><a ng-if="inputDescripcion" class="errorFront">{{ErroresFront.Obligatorio}}</a></td>
-                            </tr>
-
-                        </table>
-                        <div>
-                            <a href="#" class="btn btn-success" ng-click="ValidarInsert()">Cargar</a>
-
-                            <a href="#" class="btn btn-default" ng-click="Logout()">Logout</a>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                Titulo:
+                            </div>
+                            <div class="col-sm-3">
+                                <input ng-class="{'errorFront': inputTitulo}" class="inputEdit" type="text" ng-model="Cabanas.Titulo" />
+                            </div>
+                            <div class="col-sm-6">
+                                <a ng-if="inputTitulo" class="errorFront">{{ErroresFront.Obligatorio}}</a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                Url:
+                            </div>
+                            <div class="col-sm-3">
+                                <input ng-class="{'errorFront': inputUrl}" class="inputEdit" type="text" ng-model="Cabanas.Url" />
+                            </div>
+                            <div class="col-sm-6">
+                                <a ng-if="inputUrl" class="errorFront">{{ErroresFront.Obligatorio}}</a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                Descripcion:
+                            </div>
+                            <div class="col-sm-3">
+                                <textarea ng-class="{'errorFront': inputDescripcion}" class="inputEdit" rows="5" cols="20" ng-model="Cabanas.Descripcion" style="width:174px"></textarea>
+                            </div>
+                            <div class="col-sm-6">
+                                <a ng-if="inputDescripcion" class="errorFront">{{ErroresFront.Obligatorio}}</a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <a href="#" class="btn btn-primary btn-lg" ng-click="ValidarInsert()">Cargar</a>
+                            </div>
+                            <div class="col-sm-9">
+                                <a href="#" class="btn btn-default btn-lg" ng-click="Logout()">Logout</a>
+                            </div>
                         </div>
                     </div>
                     <!--AREA ADMINISTRACION-->
@@ -195,9 +221,9 @@
         </div>
     </div>
     <div class="footer">
-        <div class="container">
+        @*<div class="container">
             &copy; Copyright 2015
-        </div>
+        </div>*@
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
