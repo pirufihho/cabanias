@@ -65,10 +65,10 @@
                     <div class="container" ng-repeat="x in items">
                         <div class="row">
                             <div class="col-sm-6 col-xs-12">
-                                <label ng-if="!(x.Id==IdSelec)">{{x.Titulo}}</label>
+                                <h3 ng-if="!(x.Id==IdSelec)">{{x.Titulo}}</h3>
                                 <input class="inputEdit" type="text" ng-model="x.Titulo" ng-if="x.Id==IdSelec" />
                             </div>
-                            <div class="col-sm-6 col-xs-12" ng-if="Logueado">
+                            <div class="col-sm-6 col-xs-12" ng-if="Logueado" style="margin-top: 15px;">
                                 <a href="" ng-click="Delete(x.Id);">
                                     <img src="../img/120px-Icon-trash.png" style="height:30px; width:30px;" />
                                 </a>

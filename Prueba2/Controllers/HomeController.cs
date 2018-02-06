@@ -59,35 +59,39 @@ namespace Prueba2.Controllers
 
             try
             {
-                List<Cabanias> listaCabanias = new List<Cabanias>();
+                //List<Cabanias> listaCabanias = new List<Cabanias>();
+                //using (SqlConnection conn = new SqlConnection(ConnectionString()))
+                //{
+                //    conn.Open();
+                //    using (SqlCommand query = new SqlCommand("select * from Cabanias", conn))
+                //    {
+                //        //TODO: May be you have parameters - assign them here...
+                //        using (var reader = query.ExecuteReader())
+                //        {
+                //            while (reader.Read())
+                //            {
+                //                Cabanias c = new Cabanias();
+                //                c.Id = Convert.ToInt32(reader[0]);
+                //                c.Titulo = reader[1].ToString();
+                //                c.Descripcion = reader[2].ToString();
+                //                c.Url = reader[3].ToString();
+                //                listaCabanias.Add(c);
+                //            }
+                //        }
+                //    }
+                //}
 
-                using (SqlConnection conn = new SqlConnection(ConnectionString()))
+                //result.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
+                //result.Data = new { Respuesta = listaCabanias };
+
+                using (var dbcontext = new BDDPruebaEntities1())
                 {
-                    conn.Open();
+                    var cabaniasEntity = dbcontext.Cabanias.ToList<Cabanias>();
 
-                    using (SqlCommand query = new SqlCommand("select * from Cabanias", conn))
-                    {
-                        //TODO: May be you have parameters - assign them here...
-
-                        using (var reader = query.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                Cabanias c = new Cabanias();
-                                c.Id = Convert.ToInt32(reader[0]);
-                                c.Titulo = reader[1].ToString();
-                                c.Descripcion = reader[2].ToString();
-                                c.Url = reader[3].ToString();
-                                
-                                listaCabanias.Add(c);
-                            }
-                        }
-                    }
+                    result.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
+                    result.Data = new { Respuesta = cabaniasEntity };
                 }
-
-                result.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
-                result.Data = new { Respuesta = listaCabanias };
-
+                
                 return result;
             }
             catch (Exception ex)
@@ -100,33 +104,40 @@ namespace Prueba2.Controllers
         [HttpPost]
         public JsonResult Insertar(string pTitulo,string pDescripcion,string pUrl)
         {
-
             var result = new JsonResult();
 
             try
             {
-                SqlConnection conn = new SqlConnection(ConnectionString());
+                //SqlConnection conn = new SqlConnection(ConnectionString());
+                //String query = "INSERT INTO Cabanias (Titulo,Descripcion,Url) VALUES(@Titulo,@Descripcion,@Url)";
+                //SqlCommand command = new SqlCommand(query, conn);
+                //command.Parameters.AddWithValue("@Titulo", pTitulo);
+                //command.Parameters.AddWithValue("@Descripcion", pDescripcion);
+                //command.Parameters.AddWithValue("@Url", pUrl);
+                //command.Connection.Open();
+                //command.ExecuteNonQuery();
+                //result.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
+                //result.Data = new { Respuesta = "OK" };
 
-                String query = "INSERT INTO Cabanias (Titulo,Descripcion,Url) VALUES(@Titulo,@Descripcion,@Url)";
+                using (var dbcontext = new BDDPruebaEntities1())
+                {
+                    var Cab = new Cabanias()
+                    {
+                        Titulo = pTitulo,
+                        Descripcion = pDescripcion,
+                        Url = pUrl
+                    };
+                    dbcontext.Cabanias.Add(Cab);
+                    dbcontext.SaveChanges();
 
-
-                SqlCommand command = new SqlCommand(query, conn);
-                command.Parameters.AddWithValue("@Titulo", pTitulo);
-                command.Parameters.AddWithValue("@Descripcion", pDescripcion);
-                command.Parameters.AddWithValue("@Url", pUrl);
-
-                command.Connection.Open();
-                command.ExecuteNonQuery();
-
-                result.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
-                result.Data = new { Respuesta = "OK" };
-
+                    result.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
+                    result.Data = new { Respuesta = "OK" };
+                }
                 return result;
             }
             catch (Exception ex)
             {
                 result.Data = new { Respuesta = "ERROR" };
-
                 return result;
             }
 
@@ -139,25 +150,27 @@ namespace Prueba2.Controllers
 
             try
             {
-                SqlConnection conn = new SqlConnection(ConnectionString());
+                //SqlConnection conn = new SqlConnection(ConnectionString());
+                //String query = "DELETE FROM Cabanias WHERE Id=@Id;";
+                //SqlCommand command = new SqlCommand(query, conn);
+                //command.Parameters.AddWithValue("@Id", pId);
+                //command.Connection.Open();
+                //command.ExecuteNonQuery();
 
-                String query = "DELETE FROM Cabanias WHERE Id=@Id;";
-
-                SqlCommand command = new SqlCommand(query, conn);
-                command.Parameters.AddWithValue("@Id", pId);
-
-                command.Connection.Open();
-                command.ExecuteNonQuery();
+                using (var dbcontext = new BDDPruebaEntities1())
+                {
+                    var Cab = dbcontext.Cabanias.Where(s => s.Id == pId).First<Cabanias>();  
+                    dbcontext.Cabanias.Remove(Cab);
+                    dbcontext.SaveChanges();
+                }
 
                 result.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
                 result.Data = new { Respuesta = "OK" };
-
                 return result;
             }
             catch (Exception ex)
             {
                 result.Data = new { Respuesta = "ERROR" };
-
                 return result;
             }
 
@@ -170,34 +183,36 @@ namespace Prueba2.Controllers
 
             try
             {
-                SqlConnection conn = new SqlConnection(ConnectionString());
+                //SqlConnection conn = new SqlConnection(ConnectionString());
+                //String query = "UPDATE Cabanias SET Titulo = @Titulo, Descripcion = @Descripcion, Url = @Url WHERE Id=@Id;";
+                //SqlCommand command = new SqlCommand(query, conn);
+                //command.Parameters.AddWithValue("@Id", pId);
+                //command.Parameters.AddWithValue("@Descripcion", pDescripcion);
+                //command.Parameters.AddWithValue("@Titulo", pTitulo);
+                //command.Parameters.AddWithValue("@Url", pUrl);
+                //command.Connection.Open();
+                //command.ExecuteNonQuery();
 
-                String query = "UPDATE Cabanias SET Titulo = @Titulo, Descripcion = @Descripcion, Url = @Url WHERE Id=@Id;";
+                using (var dbcontext = new BDDPruebaEntities1())
+                {
+                    var Cab = dbcontext.Cabanias.Where(s => s.Id == pId).First<Cabanias>();
 
-
-                SqlCommand command = new SqlCommand(query, conn);
-                command.Parameters.AddWithValue("@Id", pId);
-                command.Parameters.AddWithValue("@Descripcion", pDescripcion);
-                command.Parameters.AddWithValue("@Titulo", pTitulo);
-                command.Parameters.AddWithValue("@Url", pUrl);
-
-                command.Connection.Open();
-                command.ExecuteNonQuery();
+                    Cab.Titulo = pTitulo;
+                    Cab.Descripcion = pDescripcion;
+                    Cab.Url = pUrl;
+                    dbcontext.SaveChanges();
+                }
 
                 result.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
                 result.Data = new { Respuesta = "OK" };
-
                 return result;
             }
             catch (Exception ex)
             {
                 result.Data = new { Respuesta = "ERROR" };
-
                 return result;
             }
         }
-
-        
 
     }
 }

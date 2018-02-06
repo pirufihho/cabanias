@@ -163,27 +163,27 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Cabania.cs">
-      <DependentUpon>ModelCabañas.tt</DependentUpon>
+    <Compile Include="Cabanias.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Cabanias.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Cabanias.cs">
+      <DependentUpon>Cabanias.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Cabanias.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Cabanias.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Cabanias1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Cabanias.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="ModelCabañas.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ModelCabañas.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ModelCabañas.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ModelCabañas.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ModelCabañas.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ModelCabañas.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\CabaniasModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -192,6 +192,16 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="Cabanias.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Cabanias.edmx</DependentUpon>
+      <LastGenOutput>Cabanias.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Cabanias.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Cabanias.edmx</DependentUpon>
+      <LastGenOutput>Cabanias1.cs</LastGenOutput>
+    </Content>
     <Content Include="css\mobile.css" />
     <Content Include="css\styleOLD.css" />
     <Content Include="css\styles.css" />
@@ -206,16 +216,6 @@
     <Content Include="img\Logo.png" />
     <Content Include="img\Pencil.png" />
     <Content Include="img\Save_ico.png" />
-    <Content Include="ModelCabañas.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ModelCabañas.edmx</DependentUpon>
-      <LastGenOutput>ModelCabañas.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="ModelCabañas.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ModelCabañas.edmx</DependentUpon>
-      <LastGenOutput>ModelCabañas.cs</LastGenOutput>
-    </Content>
     <Content Include="partials\404.html" />
     <Content Include="partials\about.html" />
     <Content Include="partials\blog.html" />
@@ -266,12 +266,12 @@
     <Content Include="Views\Home\IndexOLD.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="ModelCabañas.edmx">
+    <EntityDeploy Include="Cabanias.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ModelCabañas.Designer.cs</LastGenOutput>
+      <LastGenOutput>Cabanias.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="ModelCabañas.edmx.diagram">
-      <DependentUpon>ModelCabañas.edmx</DependentUpon>
+    <Content Include="Cabanias.edmx.diagram">
+      <DependentUpon>Cabanias.edmx</DependentUpon>
     </Content>
     <None Include="Properties\PublishProfiles\walitas.pubxml" />
     <Content Include="Scripts\js\angular-sanitize.min.js.map" />

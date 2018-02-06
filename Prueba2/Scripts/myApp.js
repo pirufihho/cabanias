@@ -1,6 +1,20 @@
 ﻿var app = angular.module("myApp", []).controller("myCtrl", function ($scope, $http) {
 
     console.log("...");
+    
+    $scope.User = "";
+    $scope.Pass = "";
+    $scope.Logueado = false;
+    $scope.inputTitulo = false;
+    $scope.inputDescripcion = false;
+    $scope.inputUrl = false;
+    $scope.inputEmailInalid = false;
+    $scope.inputEmail = false;
+    $scope.inputConsulta = false;
+    $scope.DivHome = true;
+    $scope.DivAdmin = false;
+    $scope.DivCabanias = false;
+    $scope.DivContacto = false;
 
     $scope.ErroresFront = {
         Obligatorio: "El campo es obligatorio.",
@@ -19,20 +33,6 @@
         Email: "",
         Consulta: "",
     }
-
-    $scope.User = "";
-    $scope.Pass = "";
-    $scope.Logueado = false;
-    $scope.inputTitulo = false;
-    $scope.inputDescripcion = false;
-    $scope.inputUrl = false;
-    $scope.inputEmailInalid = false;
-    $scope.inputEmail = false;
-    $scope.inputConsulta = false;
-    $scope.DivHome = true;
-    $scope.DivAdmin = false;
-    $scope.DivCabanias = false;
-    $scope.DivContacto = false;
 
     $scope.Login = function () {
         //LOGICA DEL LOGIN
@@ -233,7 +233,6 @@
         } else {
             console.log("Presiono cancelar");
         }
-
     }
 
     $scope.Save = function (Id, Titulo, Descripcion, Url) {
@@ -264,7 +263,6 @@
             });
     }
 
-    //FUNCION DEL PAGER
     $scope.GetPager = function (totalItems, currentPage, pageSize) {
         // default to first page
         currentPage = currentPage || 1;
